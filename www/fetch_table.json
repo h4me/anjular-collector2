@@ -1,0 +1,10 @@
+{
+ "records" : [
+ { "name" : "Pawel",  "phone": "444-43-24", "age" : "30" },
+ { "name" : "Jacek",  "phone": "44-43-222" ,"age" : "21" },
+ { "name" : "Kasia",  "phone": "43434-444" ,"age" : "32" },
+ { "name" : "Mirek",  "phone": "232323-23" ,"age" : "12" },
+ { "name" : "Marek",  "phone": "99999923-23" ,"age" : "55" },
+ { "name" : "Trol",  "phone": "58373-23","age" : "21" }
+ ]
+}

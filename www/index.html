@@ -1,0 +1,90 @@
+<!doctype html>
+<html ng-app="collector" ng-controller="root_controller">
+  <head >
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-3.0.3.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="js/custom.js"></script>
+
+    <title> {{MainTitle}} </title>
+  </head>
+  <body>
+
+<div class="container">
+
+   <button  type="button" class="btn btn-primary d-inline-block" ng-model="SimpleView" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+      Simple View
+   </button>
+
+   <p class="d-inline-block">
+    SimpleView =>  {{SimpleView}}
+  </p>
+    <div class="containter d-inline-block">
+         <ul uib-pagination direction-links="false" boundary-links="true" items-per-page="itemsPerPage" total-items="records.length" ng-model="currentPage" ng-change="figureOutTodosToDisplay()"></ul>
+    </div>
+</div>
+<div class="container">
+
+<input type="text" ng-model="search_input" placeholder="Search name">
+<p> Total Rows {{ records.length }}    </p>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <td>
+      #
+    </td>
+    <td ng-click="sortType='name'">
+       Name
+    </td>
+    <td ng-click="sortType='phone'">
+       Phone
+    </td>
+    <td ng-click="sortType='age'">
+       Age
+    </td>
+  </tr>
+  </thead>
+
+<tr ng-if="SimpleView" ng-repeat="row in filteredrecords | filter:search_input | orderBy:sortType" ng-init="i = $index">
+<!--
+   orderBy:sortType:sortReverse
+-->
+<td> {{i}} </td>
+<td>{{row.name}}</td>
+<td>{{row.phone}}</td>
+<td>{{row.age}}</td>
+</tr>
+
+</table>
+<!--
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+-->
+<div>
+    <pre>You are currently on page {{currentPage}}</pre>
+
+</div>
+
+
+
+</div>
+
+
+<ng-include src="FooterPage"></ng-include>
