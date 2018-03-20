@@ -13,7 +13,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script src="js/custom.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
 
     <title> {{MainTitle}} </title>
   </head>
@@ -21,6 +25,8 @@
 
 <div class="container">
 
+    <div id="my" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  <script src="js/custom.js"></script>
    <button  type="button" class="btn btn-primary d-inline-block" ng-model="SimpleView" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
       Simple View
    </button>
