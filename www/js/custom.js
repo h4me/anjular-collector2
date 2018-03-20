@@ -1,7 +1,7 @@
 
-function make_chart() {
+function make_chart(id) {
 
-Highcharts.chart('my', {
+Highcharts.chart(id, {
   credits: {
       enabled: false
   },
@@ -69,18 +69,13 @@ Highcharts.chart('my', {
 
 }
 
-make_chart();
+// make_chart('my');
 
-var app = angular.module('collector', ['ui.bootstrap'])
 
-app.controller('root_controller', function($scope,$http){
+app.controller('body_controller', function($scope,$http,$route, $routeParams, $location){
 
-$scope.MainTitle = 'Collector Title Page';
-$scope.FooterPage = 'footer.html';
 $scope.search_input = ''
 $scope.sortType='name'
-
-
 
 
  $scope.totalItems = 64;
@@ -93,7 +88,10 @@ $scope.sortType='name'
      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
      var end = begin + $scope.itemsPerPage;
      $scope.filteredrecords = $scope.records.slice(begin, end);
-     make_chart();
+      make_chart('my1');
+      make_chart('my2');
+    //  make_chart('my3');
+    // make_chart('my3');
    };
 
 
@@ -112,9 +110,5 @@ $scope.sortType='name'
            console.log("Error Can not load page fetch_table " + response.page )//Second function handles error
            $scope.content = "Something went wrong";
     });
-
-
-
-
 
 });
