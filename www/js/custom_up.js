@@ -12,6 +12,9 @@ app.config(function($routeProvider,$locationProvider) {
     .when("/paris", {
         templateUrl : "paris.htm"
     })
+    .when("/app", {
+        templateUrl : "application.html"
+    })
     .otherwise({
         // templateUrl : "paris.htm",
         template: '<b> No Template found </b>',
