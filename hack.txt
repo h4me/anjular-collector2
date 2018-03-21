@@ -50,3 +50,32 @@ Bootstrap UI component
     total-items="todos.length"
     ng-model="currentPage"
     ng-change="pageChanged()"></pagination>
+
+
+
+
+========= Html5 ====
+
+$locationProvider.html5Mode(true)
+
+Taken from AngularJS docs :
+
+    When you use HTML5 history API mode, you will need different links in different browsers, but all you have to do is specify regular URL links, such as: <a href="/some?foo=bar">link</a>
+
+    When a user clicks on this link,
+
+        In a legacy browser, the URL changes to /index.html#!/some?foo=bar
+        In a modern browser, the URL changes to /some?foo=bar
+
+    In cases like the following, links are not rewritten; instead, the browser will perform a full page reload to the original link.
+
+        Links that contain target element
+        Example: <a href="/ext/link?a=b" target="_self">link</a>
+        Absolute links that go to a different domain
+        Example: <a href="http://angularjs.org/">link</a>
+        Links starting with '/' that lead to a different base path when base is defined
+        Example: <a href="/not-my-base/link">link</a>
+
+In our case above, just put a target="_self" attribute to the anchor and the browser will do a full page reload so they hit the server side application directly.
+
+There we go, all good and set. Now back to the code :)

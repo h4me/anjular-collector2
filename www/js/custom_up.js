@@ -1,6 +1,6 @@
 var app = angular.module('collector', ['ui.bootstrap','ngRoute'])
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider,$locationProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "main.html",
@@ -11,7 +11,17 @@ app.config(function($routeProvider) {
     })
     .when("/paris", {
         templateUrl : "paris.htm"
+    })
+    .otherwise({
+        // templateUrl : "paris.htm",
+        template: '<b> No Template found </b>',
+        redirectTo: function() {
+            return "/";
+        }
     });
+
+
+  //  $locationProvider.html5Mode(true);
 });
 
 
