@@ -79,3 +79,110 @@ Taken from AngularJS docs :
 In our case above, just put a target="_self" attribute to the anchor and the browser will do a full page reload so they hit the server side application directly.
 
 There we go, all good and set. Now back to the code :)
+
+
+
+
+======= HasBank ========
+
+https://stackoverflow.com/questions/16677528/location-switching-between-html5-and-hashbang-mode-link-rewriting?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+353
+down vote
+accepted
+
+The documentation is not very clear about AngularJS routing. It talks about Hashbang and HTML5 mode. In fact, AngularJS routing operates in three modes:
+
+   Hashbang Mode
+   HTML5 Mode
+   Hashbang in HTML5 Mode
+
+For each mode there is a a respective LocationUrl class (LocationHashbangUrl, LocationUrl and LocationHashbangInHTML5Url).
+
+In order to simulate URL rewriting you must actually set html5mode to true and decorate the $sniffer class as follows:
+
+$provide.decorator('$sniffer', function($delegate) {
+ $delegate.history = false;
+ return $delegate;
+});
+
+I will now explain this in more detail:
+Hashbang Mode
+
+Configuration:
+
+$routeProvider
+ .when('/path', {
+   templateUrl: 'path.html',
+});
+$locationProvider
+ .html5Mode(false)
+ .hashPrefix('!');
+
+This is the case when you need to use URLs with hashes in your HTML files such as in
+
+<a href="index.html#!/path">link</a>
+
+In the Browser you must use the following Link: http://www.example.com/base/index.html#!/base/path
+
+As you can see in pure Hashbang mode all links in the HTML files must begin with the base such as "index.html#!".
+HTML5 Mode
+
+Configuration:
+
+$routeProvider
+ .when('/path', {
+   templateUrl: 'path.html',
+ });
+$locationProvider
+ .html5Mode(true);
+
+You should set the base in HTML-file
+
+<html>
+ <head>
+   <base href="/">
+ </head>
+</html>
+
+In this mode you can use links without the # in HTML files
+
+<a href="/path">link</a>
+
+Link in Browser:
+
+http://www.example.com/base/path
+
+Hashbang in HTML5 Mode
+
+This mode is activated when we actually use HTML5 mode but in an incompatible browser. We can simulate this mode in a compatible browser by decorating the $sniffer service and setting history to false.
+
+Configuration:
+
+$provide.decorator('$sniffer', function($delegate) {
+ $delegate.history = false;
+ return $delegate;
+});
+$routeProvider
+ .when('/path', {
+   templateUrl: 'path.html',
+ });
+$locationProvider
+ .html5Mode(true)
+ .hashPrefix('!');
+
+Set the base in HTML-file:
+
+<html>
+ <head>
+   <base href="/">
+ </head>
+</html>
+
+In this case the links can also be written without the hash in the HTML file
+
+<a href="/path">link</a>
+
+Link in Browser:
+
+http://www.example.com/index.html#!/base/path
